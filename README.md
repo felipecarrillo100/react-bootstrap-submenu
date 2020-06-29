@@ -1,4 +1,4 @@
-# react-jsoneditor-wrapper
+# react-bootstrap-submenu
 A React Typescript module that provides a SubMenu functionality for React-Bootstrap >1.0.
 
 ## How to install:
