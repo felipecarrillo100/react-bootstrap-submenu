@@ -72,7 +72,7 @@ var DropdownSubmenu = /** @class */ (function (_super) {
         var _this = this;
         var className = 'dropdown-submenu-container';
         className = this.props.className
-            ? +className + ' ' + this.props.className
+            ? className + ' ' + this.props.className
             : className;
         return (React.createElement("div", { className: className },
             React.createElement("a", { href: this.props.href, className: "dropdown-item dropdown-submenu dropdown-toggle", onClick: this.onClick }, this.props.title),

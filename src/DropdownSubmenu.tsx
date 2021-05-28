@@ -20,7 +20,7 @@ export class DropdownSubmenu extends React.Component<Props> {
   render() {
     let className = 'dropdown-submenu-container';
     className = this.props.className
-      ? +className + ' ' + this.props.className
+      ? className + ' ' + this.props.className
       : className;
     return (
       <div className={className}>
