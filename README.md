@@ -51,4 +51,4 @@ Example:
       </NavDropdownMenu>
 ```  
 
-A small sample is provided here: https://codesandbox.io/s/react-bootstrap-submenu-hz17d
+A small example is provided here: https://codesandbox.io/s/react-bootstrap-submenu-hz17d
