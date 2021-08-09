@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap-submenu",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A React Typescript module that provides a SubMenu functionality for React-Bootstrap >1.0.",
   "keywords": [
     "react-bootstrap",
@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@types/react": "^16.9.23",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.10"
   },
   "dependencies": {
     "react-bootstrap": "^1.0.1"

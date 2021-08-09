@@ -2,6 +2,7 @@ import * as React from 'react';
 import { SelectCallback } from 'react-bootstrap/helpers';
 import { DropdownItemProps } from 'react-bootstrap/DropdownItem';
 interface Props extends DropdownItemProps {
+    id?: string;
     href?: string;
     eventKey?: any;
     title?: string;

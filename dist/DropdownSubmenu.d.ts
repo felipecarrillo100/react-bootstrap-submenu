@@ -2,6 +2,7 @@ import * as React from 'react';
 import '../src/index.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 interface Props {
+    id?: string;
     className?: string;
     href?: string;
     title: string | JSX.Element;

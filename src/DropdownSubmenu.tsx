@@ -3,6 +3,7 @@ import '../src/index.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 interface Props {
+  id?: string;
   className?: string;
   href?: string;
   title: string | JSX.Element;
@@ -23,7 +24,7 @@ export class DropdownSubmenu extends React.Component<Props> {
       ? className + ' ' + this.props.className
       : className;
     return (
-      <div className={className}>
+      <div className={className} id={this.props.id}>
         <a
           href={this.props.href}
           className="dropdown-item dropdown-submenu dropdown-toggle"

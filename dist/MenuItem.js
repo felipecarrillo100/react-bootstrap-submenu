@@ -48,7 +48,7 @@ var MenuItem = /** @class */ (function (_super) {
         return _this;
     }
     MenuItem.prototype.render = function () {
-        return (React.createElement(react_bootstrap_1.Dropdown.Item, { href: this.props.href, title: this.props.title, className: this.props.className, onSelect: this.onSelect, active: this.props.active, disabled: this.props.disabled, onClick: this.props.onClick }, this.props.children));
+        return (React.createElement(react_bootstrap_1.Dropdown.Item, { id: this.props.id, href: this.props.href, title: this.props.title, className: this.props.className, onSelect: this.onSelect, active: this.props.active, disabled: this.props.disabled, onClick: this.props.onClick }, this.props.children));
     };
     return MenuItem;
 }(React.Component));

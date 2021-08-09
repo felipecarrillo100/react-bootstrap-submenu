@@ -4,6 +4,7 @@ import { SelectCallback } from 'react-bootstrap/helpers';
 import { DropdownItemProps } from 'react-bootstrap/DropdownItem';
 
 interface Props extends DropdownItemProps {
+  id?: string;
   href?: string;
   eventKey?: any;
   title?: string;
@@ -24,6 +25,7 @@ export class MenuItem extends React.Component<Props> {
   render() {
     return (
       <Dropdown.Item
+        id={this.props.id}
         href={this.props.href}
         title={this.props.title}
         className={this.props.className}
