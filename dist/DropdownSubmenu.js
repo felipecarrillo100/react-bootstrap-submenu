@@ -34,7 +34,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DropdownSubmenu = void 0;
 var React = __importStar(require("react"));
-require("../src/index.css");
 var DropdownSubmenu = /** @class */ (function (_super) {
     __extends(DropdownSubmenu, _super);
     function DropdownSubmenu() {

@@ -5,6 +5,13 @@ A React Typescript module that provides a SubMenu functionality for React-Bootst
 npm install react-bootstrap-submenu
 
 ## How to include
+### Step 1: Import CSS styles
+Styles are located at: 
+
+```
+"react-bootstrap-submenu/dist/index.css"
+```
+### Step2: Import JavaScript modules
 ```javascript
 import { DropdownSubmenu, NavDropdownMenu} from "react-bootstrap-submenu";
 ```

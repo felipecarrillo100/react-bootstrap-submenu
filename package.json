@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap-submenu",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "A React Typescript module that provides a SubMenu functionality for React-Bootstrap >1.0.",
   "keywords": [
     "react-bootstrap",
@@ -10,7 +10,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && copyfiles -u 1 ./src/*.css ./dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@types/react": "^16.9.23",
+    "copyfiles": "^2.4.1",
     "typescript": "^3.9.10"
   },
   "dependencies": {
