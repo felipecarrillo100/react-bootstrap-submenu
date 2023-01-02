@@ -1,91 +1,67 @@
 import * as React from 'react';
-import Dropdown from 'react-bootstrap/Dropdown';
+import {DropdownProps} from 'react-bootstrap/Dropdown';
+import {useRef} from "react";
 
-interface Props {
+interface Props extends DropdownProps {
   id?: string;
   className?: string;
   href?: string;
-  title: string | JSX.Element;
-  onClick?: React.MouseEventHandler<this>;
-  onToggle?: (
-    isOpen: boolean,
-    event: React.SyntheticEvent<Dropdown>,
-    metadata: { source: 'select' | 'click' | 'rootClose' | 'keydown' }
-  ) => void;
 }
 
-export class DropdownSubmenu extends React.Component<Props> {
-  private refSubMenuContent: HTMLDivElement | null = null;
+export const DropdownSubmenu: React.FC<Props> = (props:Props)  => {
+  let refSubMenuContent = useRef(null as HTMLDivElement | null);
 
-  render() {
     let className = 'dropdown-submenu-container';
-    className = this.props.className
-      ? className + ' ' + this.props.className
+    className = props.className
+      ? className + ' ' + props.className
       : className;
-    return (
-      <div className={className} id={this.props.id}>
-        <a
-          href={this.props.href}
-          className="dropdown-item dropdown-submenu dropdown-toggle"
-          onClick={this.onClick}
-        >
-          {this.props.title}
-        </a>
-        <div
-          className="dropdown-menu"
-          ref={(ref) => (this.refSubMenuContent = ref)}
-        >
-          {this.props.children}
-        </div>
-      </div>
-    );
-  }
 
-  private onClick = (event: React.SyntheticEvent<any>) => {
+  const onClick = (event: React.SyntheticEvent<any>) => {
     event.preventDefault();
     event.stopPropagation();
-    if (this.refSubMenuContent) {
+
+    if (refSubMenuContent.current) {
       let show = false;
-      if (this.refSubMenuContent.classList.contains('show')) {
-        DropdownSubmenu.hideChildren(this.refSubMenuContent);
+      if (refSubMenuContent.current.classList.contains('show')) {
+        hideChildren(refSubMenuContent.current);
       } else {
         show = true;
-        this.hideSibblings();
+        hideSiblings();
       }
-      this.refSubMenuContent.classList.toggle('show');
-      if (typeof this.props.onToggle === 'function') {
-        this.props.onToggle(show, event, { source: 'select' });
+      refSubMenuContent.current.classList.toggle('show');
+      if (typeof props.onToggle === 'function') {
+        props.onToggle(show, { source: 'select' , originalEvent: event});
       }
     }
   };
 
-  private hideSibblings = () => {
-    if (this.refSubMenuContent) {
-      const parents = DropdownSubmenu.getParents(
-        this.refSubMenuContent,
-        '.dropdown-menu.show'
+  const hideSiblings = () => {
+    if (refSubMenuContent.current) {
+      const parents = getParents(
+          refSubMenuContent.current,
+          '.dropdown-menu.show'
       );
       if (parents.length > 1) {
-        DropdownSubmenu.hideChildren(parents[1]);
+        hideChildren(parents[1]);
       }
     }
   };
 
-  private static hideChildren(parent: any) {
+  const hideChildren = (parent: any) => {
     const children = parent.querySelectorAll('.dropdown-menu.show') as any;
     for (const child of children) {
       child.classList.remove('show');
     }
   }
 
-  private static getParents(elem: any, selector: string) {
+  const getParents = (elem: any, selector: string) => {
     const nodes = [];
     let element = elem;
     nodes.push(element);
     while (element.parentNode) {
       if (
-        typeof element.parentNode.matches === 'function' &&
-        element.parentNode.matches(selector)
+          typeof element.parentNode.matches === 'function' &&
+          element.parentNode.matches(selector)
       ) {
         nodes.push(element.parentNode);
       }
@@ -93,4 +69,23 @@ export class DropdownSubmenu extends React.Component<Props> {
     }
     return nodes;
   }
+
+    return (
+      <div className={className} id={props.id}>
+        <a
+          href={props.href}
+          className="dropdown-item dropdown-submenu dropdown-toggle"
+          onClick={onClick}
+        >
+          {props.title}
+        </a>
+        <div
+          className="dropdown-menu"
+          ref={refSubMenuContent}
+        >
+          {props.children}
+        </div>
+      </div>
+    );
+
 }

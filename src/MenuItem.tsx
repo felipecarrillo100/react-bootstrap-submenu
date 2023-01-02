@@ -1,50 +1,41 @@
 import * as React from 'react';
 import { Dropdown } from 'react-bootstrap';
-import { SelectCallback } from 'react-bootstrap/helpers';
 import { DropdownItemProps } from 'react-bootstrap/DropdownItem';
+import {SyntheticEvent} from "react";
 
 interface Props extends DropdownItemProps {
   id?: string;
   href?: string;
-  eventKey?: any;
   title?: string;
   divider?: boolean;
   className?: string;
-  onSelect?: SelectCallback;
+  onSelect?: (event: SyntheticEvent<HTMLElement, Event>) => void;
   active?: boolean;
   disabled?: boolean;
-  onClick?: React.MouseEventHandler<this>;
+  onClick?: React.MouseEventHandler<any>;
 }
 
-export class MenuItem extends React.Component<Props> {
-  private eventKey: string;
-  constructor(props: Props) {
-    super(props);
-    this.eventKey = this.props.eventKey;
-  }
-  render() {
-    return (
-      <Dropdown.Item
-        id={this.props.id}
-        href={this.props.href}
-        title={this.props.title}
-        className={this.props.className}
-        onSelect={this.onSelect}
-        active={this.props.active}
-        disabled={this.props.disabled}
-        onClick={this.props.onClick}
-      >
-        {this.props.children}
-      </Dropdown.Item>
-    );
-  }
+export const MenuItem: React.FC<Props> = (props: Props) => {
 
-  private onSelect = (
-    eventKey: string,
-    event: React.SyntheticEvent<unknown>
-  ) => {
-    if (typeof this.props.onSelect === 'function') {
-      this.props.onSelect(this.props.eventKey, event);
+  const onSelect = (event: SyntheticEvent<HTMLElement, Event>) => {
+    if (typeof props.onSelect === 'function') {
+      props.onSelect(event);
     }
   };
+
+  return (
+      <Dropdown.Item
+        id={props.id}
+        href={props.href}
+        title={props.title}
+        className={props.className}
+        onSelect={onSelect}
+        active={props.active}
+        disabled={props.disabled}
+        onClick={props.onClick}
+      >
+        {props.children}
+      </Dropdown.Item>
+    );
+
 }

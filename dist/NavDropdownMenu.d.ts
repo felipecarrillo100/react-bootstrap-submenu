@@ -1,28 +1,17 @@
 import * as React from 'react';
-import Dropdown from 'react-bootstrap/Dropdown';
-interface Props {
-    className?: string;
-    title?: string;
-    id: string;
-    bg?: string;
+import { NavDropdownProps } from 'react-bootstrap';
+import { DropdownMenuVariant } from "react-bootstrap/DropdownMenu";
+interface Props extends NavDropdownProps {
+    title: string;
+    id?: string | undefined;
+    alignRight?: boolean;
     disabled?: boolean;
     active?: boolean;
     menuRole?: string;
     renderMenuOnMount?: boolean;
     rootCloseEvent?: 'click' | 'mousedown';
+    menuVariant?: DropdownMenuVariant;
     bsPrefix?: string;
-    alignRight?: boolean;
-    drop?: 'up' | 'left' | 'right' | 'down';
-    show?: boolean;
-    flip?: boolean;
-    onToggle?: (isOpen: boolean, event: React.SyntheticEvent<Dropdown>, metadata: {
-        source: 'select' | 'click' | 'rootClose' | 'keydown';
-    }) => void;
-    focusFirstItemOnShow?: boolean | 'keyboard';
 }
-export declare class NavDropdownMenu extends React.Component<Props> {
-    private refElement;
-    render(): JSX.Element;
-    private onToggle;
-}
+export declare const NavDropdownMenu: React.FC<Props>;
 export {};

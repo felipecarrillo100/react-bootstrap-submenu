@@ -1,17 +1,4 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -35,34 +22,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.NavDropdownMenu = void 0;
 var React = __importStar(require("react"));
 var react_bootstrap_1 = require("react-bootstrap");
-var NavDropdownMenu = /** @class */ (function (_super) {
-    __extends(NavDropdownMenu, _super);
-    function NavDropdownMenu() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.refElement = null;
-        _this.onToggle = function (show, event, metadata) {
-            if (_this.refElement) {
-                if (show === false) {
-                    var element = _this.refElement;
-                    if (element) {
-                        var children = element.querySelectorAll('.dropdown-menu.show');
-                        for (var _i = 0, children_1 = children; _i < children_1.length; _i++) {
-                            var child = children_1[_i];
-                            child.classList.remove('show');
-                        }
+var react_1 = require("react");
+exports.NavDropdownMenu = function (props) {
+    var divEl = react_1.useRef(null);
+    var onToggle = function (show, meta) {
+        if (divEl.current) {
+            if (show === false) {
+                var element = divEl.current;
+                if (element) {
+                    var children = element.querySelectorAll('.dropdown-menu.show');
+                    // @ts-ignore
+                    for (var _i = 0, children_1 = children; _i < children_1.length; _i++) {
+                        var child = children_1[_i];
+                        child.classList.remove('show');
                     }
                 }
             }
-            if (typeof _this.props.onToggle === 'function') {
-                _this.props.onToggle(show, event, metadata);
-            }
-        };
-        return _this;
-    }
-    NavDropdownMenu.prototype.render = function () {
-        var _this = this;
-        return (React.createElement(react_bootstrap_1.NavDropdown, { className: this.props.className, ref: function (ref) { return (_this.refElement = ref); }, title: this.props.title, id: this.props.id, onToggle: this.onToggle, alignRight: this.props.alignRight, bg: this.props.bg, disabled: this.props.disabled, active: this.props.active, menuRole: this.props.menuRole, renderMenuOnMount: this.props.renderMenuOnMount, rootCloseEvent: this.props.rootCloseEvent, bsPrefix: this.props.bsPrefix, drop: this.props.drop, show: this.props.show, flip: this.props.flip, focusFirstItemOnShow: this.props.focusFirstItemOnShow }, this.props.children));
+        }
+        if (typeof props.onToggle === 'function') {
+            props.onToggle(show, meta);
+        }
     };
-    return NavDropdownMenu;
-}(React.Component));
-exports.NavDropdownMenu = NavDropdownMenu;
+    return (React.createElement(react_bootstrap_1.NavDropdown, { ref: divEl, className: props.className, title: props.title, id: props.id, onToggle: onToggle, align: props.alignRight ? "end" : undefined, disabled: props.disabled, active: props.active, menuRole: props.menuRole, renderMenuOnMount: props.renderMenuOnMount, rootCloseEvent: props.rootCloseEvent, bsPrefix: props.bsPrefix, drop: props.drop, show: props.show, focusFirstItemOnShow: props.focusFirstItemOnShow }, props.children));
+};

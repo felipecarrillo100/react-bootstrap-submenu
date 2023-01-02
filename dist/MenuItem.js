@@ -1,17 +1,4 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -35,21 +22,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MenuItem = void 0;
 var React = __importStar(require("react"));
 var react_bootstrap_1 = require("react-bootstrap");
-var MenuItem = /** @class */ (function (_super) {
-    __extends(MenuItem, _super);
-    function MenuItem(props) {
-        var _this = _super.call(this, props) || this;
-        _this.onSelect = function (eventKey, event) {
-            if (typeof _this.props.onSelect === 'function') {
-                _this.props.onSelect(_this.props.eventKey, event);
-            }
-        };
-        _this.eventKey = _this.props.eventKey;
-        return _this;
-    }
-    MenuItem.prototype.render = function () {
-        return (React.createElement(react_bootstrap_1.Dropdown.Item, { id: this.props.id, href: this.props.href, title: this.props.title, className: this.props.className, onSelect: this.onSelect, active: this.props.active, disabled: this.props.disabled, onClick: this.props.onClick }, this.props.children));
+exports.MenuItem = function (props) {
+    var onSelect = function (event) {
+        if (typeof props.onSelect === 'function') {
+            props.onSelect(event);
+        }
     };
-    return MenuItem;
-}(React.Component));
-exports.MenuItem = MenuItem;
+    return (React.createElement(react_bootstrap_1.Dropdown.Item, { id: props.id, href: props.href, title: props.title, className: props.className, onSelect: onSelect, active: props.active, disabled: props.disabled, onClick: props.onClick }, props.children));
+};

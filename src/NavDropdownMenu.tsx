@@ -1,80 +1,67 @@
 import * as React from 'react';
 
-import { NavDropdown } from 'react-bootstrap';
-import Dropdown from 'react-bootstrap/Dropdown';
+import {NavDropdown, NavDropdownProps} from 'react-bootstrap';
+import {DropdownMenuVariant} from "react-bootstrap/DropdownMenu";
+import {useRef} from "react";
 
-type CallbackFunction = (b: boolean) => void;
-
-interface Props {
-  className?: string;
-  title?: string;
-  id: string;
-  bg?: string;
+interface Props extends NavDropdownProps {
+  title: string;
+  id?: string | undefined;
+  alignRight?: boolean;
   disabled?: boolean;
   active?: boolean;
   menuRole?: string;
   renderMenuOnMount?: boolean;
   rootCloseEvent?: 'click' | 'mousedown';
+  menuVariant?: DropdownMenuVariant;
   bsPrefix?: string;
-
-  alignRight?: boolean;
-  drop?: 'up' | 'left' | 'right' | 'down';
-  show?: boolean;
-  flip?: boolean;
-  onToggle?: (
-    isOpen: boolean,
-    event: React.SyntheticEvent<Dropdown>,
-    metadata: { source: 'select' | 'click' | 'rootClose' | 'keydown' }
-  ) => void;
-  focusFirstItemOnShow?: boolean | 'keyboard';
 }
 
-export class NavDropdownMenu extends React.Component<Props> {
-  private refElement: NavDropdown | null = null;
-  render() {
-    return (
-      <NavDropdown
-        className={this.props.className}
-        ref={(ref) => (this.refElement = ref)}
-        title={this.props.title}
-        id={this.props.id}
-        onToggle={this.onToggle}
-        alignRight={this.props.alignRight}
-        bg={this.props.bg}
-        disabled={this.props.disabled}
-        active={this.props.active}
-        menuRole={this.props.menuRole}
-        renderMenuOnMount={this.props.renderMenuOnMount}
-        rootCloseEvent={this.props.rootCloseEvent}
-        bsPrefix={this.props.bsPrefix}
-        drop={this.props.drop}
-        show={this.props.show}
-        flip={this.props.flip}
-        focusFirstItemOnShow={this.props.focusFirstItemOnShow}
-      >
-        {this.props.children}
-      </NavDropdown>
-    );
-  }
+export const NavDropdownMenu: React.FC<Props> = (props:Props) => {
+  let divEl = useRef(null as HTMLDivElement | null);
 
-  private onToggle = (
-    show: boolean,
-    event: React.SyntheticEvent<Dropdown>,
-    metadata: { source: 'select' | 'click' | 'rootClose' | 'keydown' }
+  const onToggle = (
+      show: boolean,
+      meta: {
+        source: string | undefined;
+        originalEvent: any | undefined;
+      }
   ) => {
-    if (this.refElement) {
+    if (divEl.current) {
       if (show === false) {
-        const element = this.refElement as any;
+        const element = divEl.current;
         if (element) {
-          const children = element.querySelectorAll('.dropdown-menu.show');
+          const children  = element.querySelectorAll('.dropdown-menu.show');
+          // @ts-ignore
           for (const child of children) {
             child.classList.remove('show');
           }
         }
       }
     }
-    if (typeof this.props.onToggle === 'function') {
-      this.props.onToggle(show, event, metadata);
+    if (typeof props.onToggle === 'function') {
+      props.onToggle(show,  meta);
     }
   };
+  return (
+      <NavDropdown
+        ref={divEl}
+        className={props.className}
+        title={props.title}
+        id={props.id}
+        onToggle={onToggle as any}
+        align={props.alignRight ? "end" : undefined}
+        disabled={props.disabled}
+        active={props.active}
+        menuRole={props.menuRole}
+        renderMenuOnMount={props.renderMenuOnMount}
+        rootCloseEvent={props.rootCloseEvent}
+        bsPrefix={props.bsPrefix}
+        drop={props.drop}
+        show={props.show}
+        focusFirstItemOnShow={props.focusFirstItemOnShow}
+      >
+        {props.children}
+      </NavDropdown>
+    );
 }

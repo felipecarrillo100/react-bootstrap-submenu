@@ -1,5 +1,9 @@
 # react-bootstrap-submenu
-A React Typescript module that provides a SubMenu functionality for React-Bootstrap >1.0.
+
+This library is a React Typescript module that provides a SubMenu functionality for React-Bootstrap.
+The current Version of react-bootstrap-submenu 3.x.x is compatible with react-bootstrap 2.x.x
+
+if you are using  the older React-Bootstrap 1.x.x then downgrading to react-bootstrap-submenu 2.x.x
 
 ## How to install:
 npm install react-bootstrap-submenu
@@ -16,7 +20,7 @@ Styles are located at:
 import { DropdownSubmenu, NavDropdownMenu} from "react-bootstrap-submenu";
 ```
 ## To use
-Create A NavBar with React-Bookstrap, but instead of using NavDropdown use NavDropdownMenu, then, to create a submenu use DropdownSubmenu
+Create A NavBar with React-Bootstrap, but instead of using NavDropdown use NavDropdownMenu, then, to create a submenu use DropdownSubmenu
  
 Example:
 ```javascript
@@ -59,3 +63,14 @@ Example:
 ```  
 
 A small example is provided here: https://codesandbox.io/s/react-bootstrap-submenu-hz17d
+
+## Donations
+Creating these libraries is my hobie. If you consider my work useful to you, please consider buying me a coffee. Your contribution keeps me motivated to created and maintain these useful libraries.
+
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate/?business=7X3JAPNBQTXZG&amount=5&no_recurring=0&item_name=NPM%2FGitHub+libraries&currency_code=USD)
+
+[![QR](https://raw.githubusercontent.com/felipecarrillo100/bankgreen/main/QR_Code_5Euro.png)](https://www.paypal.com/donate/?business=7X3JAPNBQTXZG&amount=5&no_recurring=0&item_name=NPM%2FGitHub+libraries&currency_code=USD)
+
+
+
