@@ -1,6 +1,7 @@
 {
   "name": "react-bootstrap-submenu",
   "version": "2.0.1",
+  "publishConfig": { "tag": "2.x" },
   "description": "A React Typescript module that provides a SubMenu functionality for React-Bootstrap >1.0.",
   "keywords": [
     "react-bootstrap",
