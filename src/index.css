@@ -7,6 +7,13 @@
     right: 6px;
     top: 0.8em;
 }
+.dropdown-menu-right .dropdown-submenu-container a.dropdown-submenu::after {
+    transform: rotate(90deg);
+    position: absolute;
+    left: 0;
+    right: unset;
+    top: 0.8em;
+}
 .dropdown-submenu-container .dropdown-menu {
     top: 0;
     left: 100%;
