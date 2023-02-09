@@ -1,4 +1,3 @@
 node_modules/
 .idea/
-
-/react-bootstrap-submenu-*.tgz
+*.tgz
