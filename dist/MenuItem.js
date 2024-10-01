@@ -18,15 +18,24 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MenuItem = void 0;
 var React = __importStar(require("react"));
-var react_bootstrap_1 = require("react-bootstrap");
+var DropdownItem_1 = __importDefault(require("react-bootstrap/DropdownItem"));
 exports.MenuItem = function (props) {
-    var onSelect = function (event) {
-        if (typeof props.onSelect === 'function') {
-            props.onSelect(event);
+    var onSelect = function (eventKey, event) {
+        if (typeof props.onSelectV2 === 'function') {
+            props.onSelectV2(eventKey, event);
         }
     };
-    return (React.createElement(react_bootstrap_1.Dropdown.Item, { id: props.id, href: props.href, title: props.title, className: props.className, onSelect: onSelect, active: props.active, disabled: props.disabled, onClick: props.onClick }, props.children));
+    var onClick = function (event) {
+        if (typeof props.onClick === 'function') {
+            props.onClick(event);
+        }
+        onSelect(props.eventKey, event);
+    };
+    return (React.createElement(DropdownItem_1.default, { id: props.id, href: props.href, title: props.title, className: props.className, active: props.active, disabled: props.disabled, onSelect: props.onSelect, onClick: onClick }, props.children));
 };
