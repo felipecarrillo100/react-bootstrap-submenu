@@ -13,5 +13,5 @@ interface Props extends NavDropdownProps {
     menuVariant?: DropdownMenuVariant;
     bsPrefix?: string;
 }
-export declare const NavDropdownMenu: React.FC<Props>;
+export declare const NavDropdownMenu: React.ForwardRefExoticComponent<Props & React.RefAttributes<HTMLDivElement>>;
 export {};

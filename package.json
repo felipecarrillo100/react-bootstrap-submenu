@@ -1,16 +1,18 @@
 {
   "name": "react-bootstrap-submenu",
-  "version": "3.0.4",
-  "description": "A React Typescript module that provides a SubMenu functionality for React-Bootstrap >1.0.",
+  "version": "3.1.0",
+  "description": "A React Typescript module that provides a SubMenu functionality for React-Bootstrap 2.0+.",
   "keywords": [
     "react-bootstrap",
     "typescript",
-    "Submenu"
+    "Submenu",
+    "react18",
+    "react19"
   ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc && copyfiles -u 1 ./src/*.css ./dist",
+    "build": "tsc && shx cp ./src/*.css ./dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,16 +20,20 @@
     "url": "git+https://github.com/felipecarrillo100/react-bootstrap-submenu"
   },
   "devDependencies": {
-    "@types/react": "^16.9.23",
-    "copyfiles": "^2.4.1",
-    "typescript": "^3.9.10"
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^5.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-bootstrap": "^2.10.0",
+    "shx": "^0.4.0"
   },
   "dependencies": {
-    "react-bootstrap": "^2.0.0"
+    "react-bootstrap": ">=2.0.0"
   },
   "peerDependencies": {
-    "react": ">=16.14.0",
-    "react-dom": ">=16.14.0"
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
   },
   "author": "Felipe Carrillo",
   "license": "MIT"
