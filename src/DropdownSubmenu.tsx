@@ -1,41 +1,59 @@
 import * as React from 'react';
-import { useRef, forwardRef } from "react";
+import { useRef, forwardRef } from 'react';
 import { DropdownProps } from 'react-bootstrap/Dropdown';
 
-interface Props extends Omit<DropdownProps, 'title'> {
+export interface DropdownSubmenuProps extends Omit<DropdownProps, 'title'> {
     id?: string;
     className?: string;
     href?: string;
-    title?: React.ReactNode; // Re-defining title as ReactNode to support icons/elements
+    title?: React.ReactNode;
 }
 
-export const DropdownSubmenu = forwardRef<HTMLDivElement, Props>((props, ref) => {
+export const DropdownSubmenu = forwardRef<HTMLDivElement, DropdownSubmenuProps>((props, ref) => {
+    const {
+        id,
+        className: propClassName,
+        href,
+        title,
+        children,
+        onToggle,
+        onSelect,
+        drop,
+        show,
+        align,
+        focusFirstItemOnShow,
+        navbar,
+        ...rest
+    } = props;
+
     const refSubMenuContent = useRef<HTMLDivElement | null>(null);
 
     let className = 'dropdown-submenu-container';
-    className = props.className
-        ? className + ' ' + props.className
-        : className;
+    if (propClassName) {
+        className += ' ' + propClassName;
+    }
 
-    const hideChildren = (parent: any) => {
-        const children = parent.querySelectorAll('.dropdown-menu.show');
-        for (let i = 0; i < children.length; i++) {
-            children[i].classList.remove('show');
-        }
+    const hideChildren = (parent: HTMLElement) => {
+        const activeSubmenus = parent.querySelectorAll('.dropdown-menu.show');
+        activeSubmenus.forEach((child) => {
+            child.classList.remove('show');
+        });
     };
 
-    const getParents = (elem: any, selector: string) => {
+    const getParents = (elem: HTMLElement, selector: string) => {
         const nodes = [];
-        let element = elem;
+        let element: HTMLElement | null = elem;
         nodes.push(element);
         while (element && element.parentNode) {
+            const parent = element.parentNode as HTMLElement;
             if (
-                typeof element.parentNode.matches === 'function' &&
-                element.parentNode.matches(selector)
+                parent &&
+                typeof parent.matches === 'function' &&
+                parent.matches(selector)
             ) {
-                nodes.push(element.parentNode);
+                nodes.push(parent);
             }
-            element = element.parentNode;
+            element = parent;
         }
         return nodes;
     };
@@ -44,15 +62,15 @@ export const DropdownSubmenu = forwardRef<HTMLDivElement, Props>((props, ref) =>
         if (refSubMenuContent.current) {
             const parents = getParents(
                 refSubMenuContent.current,
-                '.dropdown-menu.show'
+                '.dropdown-menu'
             );
-            if (parents.length > 1) {
+            if (parents[1]) {
                 hideChildren(parents[1]);
             }
         }
     };
 
-    const onClick = (event: React.SyntheticEvent<any>) => {
+    const onClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
         event.preventDefault();
         event.stopPropagation();
 
@@ -60,31 +78,32 @@ export const DropdownSubmenu = forwardRef<HTMLDivElement, Props>((props, ref) =>
             let show = false;
             if (refSubMenuContent.current.classList.contains('show')) {
                 hideChildren(refSubMenuContent.current);
+                refSubMenuContent.current.classList.remove('show');
             } else {
                 show = true;
                 hideSiblings();
+                refSubMenuContent.current.classList.add('show');
             }
-            refSubMenuContent.current.classList.toggle('show');
-            if (typeof props.onToggle === 'function') {
-                props.onToggle(show, { source: 'select', originalEvent: event });
+            if (typeof onToggle === 'function') {
+                onToggle(show, { source: 'select', originalEvent: event as any });
             }
         }
     };
 
     return (
-        <div className={className} id={props.id} ref={ref}>
+        <div {...rest} className={className} id={id} ref={ref}>
             <a
-                href={props.href || "#!"}
+                href={href || '#!'}
                 className="dropdown-item dropdown-submenu dropdown-toggle"
                 onClick={onClick}
             >
-                {props.title}
+                {title}
             </a>
             <div
                 className="dropdown-menu"
                 ref={refSubMenuContent}
             >
-                {props.children}
+                {children}
             </div>
         </div>
     );

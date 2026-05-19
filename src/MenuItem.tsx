@@ -2,11 +2,11 @@ import * as React from 'react';
 import { forwardRef } from 'react';
 import DropdownItem, { DropdownItemProps } from 'react-bootstrap/DropdownItem';
 
-interface Props extends DropdownItemProps {
+export interface MenuItemProps extends DropdownItemProps {
     onSelectV2?: (eventKey: string | number | undefined, event: React.MouseEvent<HTMLElement, any>) => void;
 }
 
-export const MenuItem = forwardRef<HTMLElement, Props>((props, ref) => {
+export const MenuItem = forwardRef<HTMLElement, MenuItemProps>((props, ref) => {
     const { onSelectV2, onClick, eventKey, children, ...rest } = props;
 
     const handleClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
@@ -27,3 +27,4 @@ export const MenuItem = forwardRef<HTMLElement, Props>((props, ref) => {
 });
 
 MenuItem.displayName = 'MenuItem';
+

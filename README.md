@@ -1,80 +1,110 @@
 # react-bootstrap-submenu
 
-This library is a React TypeScript module that provides SubMenu functionality for React-Bootstrap.
-The current version of `react-bootstrap-submenu` 3.x.x is compatible with **React 16.8 to 19** and **react-bootstrap 2.x.x**.
+A modern, next-generation, high-performance React component providing clean, multi-level nested submenus for **React-Bootstrap**.
 
-If you are using the older React-Bootstrap 1.x.x, please downgrade to `react-bootstrap-submenu` 2.x.x.
+[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen.svg?style=flat-square)](https://felipecarrillo100.github.io/react-bootstrap-submenu/)
+[![React 19 Ready](https://img.shields.io/badge/react-19%20ready-blue.svg?style=flat-square)](https://react.dev)
+[![TypeScript Native](https://img.shields.io/badge/typescript-native-blue.svg?style=flat-square)](https://typescriptlang.org)
+[![Build Tooling](https://img.shields.io/badge/build-tsup%20%7C%20vite%208-purple.svg?style=flat-square)](https://tsup.egoist.dev)
 
-## 📦 How to install:
+This library is built from the ground up for superior performance, type safety, and modern tooling. It is fully compatible with **React 16.8.0 to 19.x** and **react-bootstrap 2.x.x+**.
+
+## 🌐 Live Interactive Demo
+👉 **Explore the premium interactive showcase:** [https://felipecarrillo100.github.io/react-bootstrap-submenu/](https://felipecarrillo100.github.io/react-bootstrap-submenu/)
+
+---
+
+## ⚡ What's New in v4.x.x
+
+*   **React 19 & 18 Complete Support**: Full compatibility with the **React 19 compiler**, concurrent rendering, and **React Strict Mode**.
+*   **100% Functional & Hooks-Driven**: Entirely rewritten using modern React Hooks, replacing all legacy class components and deprecated methods.
+*   **Eliminated findDOMNode**: Replaced deprecated `ReactDOM.findDOMNode` queries with native React refs, preventing runtime crashes in React 19.
+*   **Wide Backwards Compatibility**: Supported in **React >= 16.8.0** all the way to **React 19**, with exact DOM structure and core legacy CSS styling preserved.
+*   **TypeScript Native**: Built with strict typing and clean interface exports.
+*   **Modern Tooling Bundle**: Powered by `tsup` and `Vite 8` for lightning-fast build distributions in both CommonJS (`.js`) and ESM (`.mjs`) modules with automatic `.d.ts` declaration generation.
+
+---
+
+## 📦 How to Install
+
 ```bash
 npm install react-bootstrap-submenu
 ```
 
-## 🛠️ How to include
-### Step 1: Import CSS styles
-Styles are located at:
+---
 
+## 🛠️ How to Include
+
+### Step 1: Import CSS Styles
+Import the standard styling sheet:
 ```javascript
-import "react-bootstrap-submenu/dist/index.css"
+import "react-bootstrap-submenu/dist/index.css";
 ```
 
-### Step 2: Import JavaScript modules
-```javascript
+### Step 2: Import Components
+```typescript
 import { DropdownSubmenu, NavDropdownMenu, MenuItem } from "react-bootstrap-submenu";
 ```
 
-## 🚀 To use
-Create a `Navbar` with React-Bootstrap, but instead of using `NavDropdown`, use `NavDropdownMenu`. Then, to create a submenu, use `DropdownSubmenu`.
+---
 
-**Note for React 18/19 Users:** This library now supports **Concurrent Rendering** and **Strict Mode**. It uses `forwardRef` to ensure proper menu positioning with the latest React-Bootstrap engines.
+## 🚀 Usage Guide
 
-### Example:
+Create a standard `Navbar` with React-Bootstrap, but instead of using `NavDropdown`, use `NavDropdownMenu`. Then, to create a nested submenu, nest a `DropdownSubmenu` inside it!
+
+### Standard Example:
 ```javascript
+import { Navbar, Nav } from "react-bootstrap";
+import { DropdownSubmenu, NavDropdownMenu, MenuItem } from "react-bootstrap-submenu";
+
+function NavigationBar() {
+  return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link href="#features">Features</Nav.Link>
+          
           <NavDropdownMenu title="Dropdown 1" id="collapsible-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-            <DropdownSubmenu href="#action/3.7" title="Text to show">
-              <NavDropdown.Item href="#action/8.1">Sub 1</NavDropdown.Item>
-              <DropdownSubmenu href="#action/3.7" title="Text to show">
-                <NavDropdown.Item href="#action/9.1">
-                  Sub 2
-                </NavDropdown.Item>
+            <MenuItem href="#action/3.1">Action</MenuItem>
+            
+            {/* Nested Submenu */}
+            <DropdownSubmenu href="#action/3.7" title="Level 1 Submenu">
+              <MenuItem href="#action/8.1">Sub Item 1</MenuItem>
+              
+              {/* Nested Level 2 Submenu */}
+              <DropdownSubmenu href="#action/3.8" title="Level 2 Submenu">
+                <MenuItem href="#action/9.1">Sub Item 2</MenuItem>
               </DropdownSubmenu>
             </DropdownSubmenu>
           </NavDropdownMenu>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
-```  
-
-### Align Right
-If you want to drop the menus to the left, you can use `NavDropdownMenu` with the prop `alignRight={true}`.
-```javascript
-     <NavDropdownMenu title="Dropdown R" id="collapsible-nav-dropdown" alignRight >
-        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-        <DropdownSubmenu href="#action/3.7" title="Text to show">
-          <NavDropdown.Item href="#action/8.1">Sub 1</NavDropdown.Item>
-          {/* Nested Submenu */}
-        </DropdownSubmenu>
-      </NavDropdownMenu>
+  );
+}
 ```
----
-## ⚡ CodeSandbox
-A small example is provided here: https://codesandbox.io/s/react-bootstrap-submenu-hz17d
+
+### Align Submenus Left
+If you want your menus to drop to the left (e.g. for right-aligned items), use `NavDropdownMenu` with `alignRight={true}`:
+```javascript
+<NavDropdownMenu title="Dropdown R" id="collapsible-nav-dropdown" alignRight>
+  <MenuItem href="#action/3.1">Action</MenuItem>
+  <DropdownSubmenu href="#action/3.7" title="Dropdown Submenu Left">
+    <MenuItem href="#action/8.1">Sub Item 1</MenuItem>
+  </DropdownSubmenu>
+</NavDropdownMenu>
+```
 
 ---
-## 🌱 Support the project
-Creating these libraries is my hobie. If you consider my work useful to you, please consider buying me a coffee. Your contribution keeps me motivated to created and maintain these useful libraries.
 
+## 🌱 Support the Project
+Creating and maintaining open source libraries is a passion project. If you find this library useful, please consider supporting its development:
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate/?business=7X3JAPNBQTXZG&amount=5&no_recurring=0&item_name=NPM%2FGitHub+libraries&currency_code=USD)
 
-[![QR](https://raw.githubusercontent.com/felipecarrillo100/bankgreen/main/QR_Code_5Euro.png)](https://www.paypal.com/donate/?business=7X3JAPNBQTXZG&amount=5&no_recurring=0&item_name=NPM%2FGitHub+libraries&currency_code=USD)
+---
 
-
-
+## 📄 License
+This project is licensed under the [MIT License](LICENSE).

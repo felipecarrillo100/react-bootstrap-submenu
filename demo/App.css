@@ -1,0 +1,182 @@
+:root {
+  --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
+  --secondary-glow: linear-gradient(
+    to bottom right,
+    rgba(1, 65, 255, 0),
+    rgba(1, 65, 255, 0),
+    rgba(1, 65, 255, 0.3)
+  );
+
+  --card-bg-gradient: linear-gradient(
+    135deg,
+    rgba(30, 35, 52, 0.75) 0%,
+    rgba(17, 18, 25, 0.95) 100%
+  );
+  --border-color: rgba(0, 0, 0, 0.08);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f8f9fa;
+  color: #212529;
+  overflow-x: hidden;
+}
+
+.font-outfit {
+  font-family: 'Outfit', sans-serif;
+}
+
+.font-xs {
+  font-size: 0.85rem;
+}
+
+/* Embedded Section Layouts */
+.demo-section {
+  position: relative;
+  scroll-margin-top: 2rem;
+}
+
+/* Standard clean spacing rule for basic section submenus to prevent arrow touching */
+.dropdown-submenu-container a.dropdown-submenu {
+    padding-right: 2.2rem;
+}
+
+.dropdown-menu-right .dropdown-submenu-container a.dropdown-submenu,
+.dropdown-menu-end .dropdown-submenu-container a.dropdown-submenu {
+    padding-left: 2.2rem;
+    padding-right: 1rem;
+}
+
+/* ==========================================
+   ADVANCED PREMIUM CUSTOMIZATION (DARK THEME)
+   ========================================== */
+
+.bg-dark-theme {
+  background-color: #090a0f !important;
+  color: #f1f3f9 !important;
+  position: relative;
+  overflow: visible;
+}
+
+/* Full Width Navbar (Premium custom) */
+.bg-dark-theme .full-width-navbar {
+  border-radius: 0 !important;
+  background: #121622 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.45);
+  position: relative !important;
+  z-index: 1000 !important;
+}
+
+.bg-dark-theme .brand-logo {
+  font-size: 1.6rem;
+}
+
+.bg-dark-theme .brand-text {
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  background: linear-gradient(90deg, #00c6ff, #0070f3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-dark-theme .navbar-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: rgba(0, 198, 255, 0.1);
+  color: #00c6ff;
+  border: 1px solid rgba(0, 198, 255, 0.2);
+  font-weight: 500;
+}
+
+/* Premium Glassmorphic Card */
+.bg-dark-theme .glass-card {
+  background: #1c2134 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  position: relative;
+  z-index: 5;
+}
+
+/* Syntax Themed Code Snippets */
+.bg-dark-theme .code-block {
+  background: #090a0f !important;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+  color: #72f1b8;
+  overflow-x: auto;
+  font-family: 'Courier New', Courier, monospace;
+  white-space: pre;
+  margin: 0;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* Submenu Visual Customizations for Advanced Custom Theme */
+.bg-dark-theme .dropdown-menu {
+  background-color: rgba(18, 20, 27, 0.95) !important;
+  backdrop-filter: blur(25px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+  padding: 8px !important;
+  z-index: 1050 !important;
+}
+
+.bg-dark-theme .dropdown-item {
+  color: rgba(255, 255, 255, 0.75) !important;
+  border-radius: 8px !important;
+  padding: 8px 16px !important;
+  font-size: 0.9rem !important;
+  transition: all 0.2s ease !important;
+}
+
+.bg-dark-theme .dropdown-item:hover, 
+.bg-dark-theme .dropdown-item:focus {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #fff !important;
+}
+
+.bg-dark-theme .dropdown-divider {
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  margin: 6px 0 !important;
+}
+
+/* Scoped override to align the legacy chevron top position due to custom padding */
+.bg-dark-theme .dropdown-submenu-container a.dropdown-submenu::after {
+    top: 50% !important;
+    transform: translateY(-50%) rotate(-90deg) !important;
+    right: 12px !important;
+}
+
+.bg-dark-theme .dropdown-menu-right .dropdown-submenu-container a.dropdown-submenu::after,
+.bg-dark-theme .dropdown-menu-end .dropdown-submenu-container a.dropdown-submenu::after {
+    top: 50% !important;
+    transform: translateY(-50%) rotate(90deg) !important;
+    left: 12px !important;
+    right: unset !important;
+}
+
+/* Scoped padding rules to guarantee a professional gap between text and chevron */
+.bg-dark-theme .dropdown-submenu-container a.dropdown-submenu {
+    padding-right: 2.5rem !important;
+}
+
+.bg-dark-theme .dropdown-menu-right .dropdown-submenu-container a.dropdown-submenu,
+.bg-dark-theme .dropdown-menu-end .dropdown-submenu-container a.dropdown-submenu {
+    padding-left: 2.5rem !important;
+    padding-right: 1.5rem !important;
+}
+
+.footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  background: #f1f3f5;
+}

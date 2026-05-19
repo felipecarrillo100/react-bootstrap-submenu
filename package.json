@@ -1,40 +1,58 @@
 {
   "name": "react-bootstrap-submenu",
-  "version": "3.1.0",
-  "description": "A React Typescript module that provides a SubMenu functionality for React-Bootstrap 2.0+.",
+  "version": "4.0.0",
+  "description": "A React TypeScript module that provides a SubMenu functionality for React-Bootstrap 2.0+ (compatible with React 18 & 19).",
   "keywords": [
     "react-bootstrap",
     "typescript",
     "Submenu",
     "react18",
-    "react19"
+    "react19",
+    "tsup",
+    "vite"
   ],
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./dist/index.css": "./dist/index.css"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsc && shx cp ./src/*.css ./dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsup --watch",
+    "build": "tsup src/index.tsx --format cjs,esm --dts --minify --clean --external react,react-dom,react-bootstrap && shx cp src/index.css dist/index.css",
+    "demo": "npm --prefix demo run dev",
+    "demo:build": "npm --prefix demo run build",
+    "typecheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/felipecarrillo100/react-bootstrap-submenu"
   },
-  "devDependencies": {
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
-    "typescript": "^5.0.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-bootstrap": "^2.10.0",
-    "shx": "^0.4.0"
-  },
-  "dependencies": {
-    "react-bootstrap": ">=2.0.0"
-  },
   "peerDependencies": {
     "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "react-dom": ">=16.8.0",
+    "react-bootstrap": ">=2.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-bootstrap": "^2.10.8",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5",
+    "shx": "^0.4.0"
   },
   "author": "Felipe Carrillo",
   "license": "MIT"
 }
+

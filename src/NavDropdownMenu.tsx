@@ -1,70 +1,55 @@
 import * as React from 'react';
-import { useRef, forwardRef } from "react";
+import { useRef, forwardRef } from 'react';
 import { NavDropdown, NavDropdownProps } from 'react-bootstrap';
-import { DropdownMenuVariant } from "react-bootstrap/DropdownMenu";
 
-interface Props extends NavDropdownProps {
-    title: string;
-    id?: string | undefined;
+export interface NavDropdownMenuProps extends Omit<NavDropdownProps, 'title'> {
+    title: React.ReactNode;
     alignRight?: boolean;
-    disabled?: boolean;
-    active?: boolean;
-    menuRole?: string;
-    renderMenuOnMount?: boolean;
-    rootCloseEvent?: 'click' | 'mousedown';
-    menuVariant?: DropdownMenuVariant;
-    bsPrefix?: string;
 }
 
-export const NavDropdownMenu = forwardRef<HTMLDivElement, Props>((props, ref) => {
+export const NavDropdownMenu = forwardRef<HTMLDivElement, NavDropdownMenuProps>((props, ref) => {
+    const {
+        title,
+        alignRight,
+        onToggle,
+        children,
+        ...rest
+    } = props;
+
     const divEl = useRef<HTMLDivElement | null>(null);
 
-    const onToggle = (
+    const handleToggle = (
         show: boolean,
         meta: {
             source: string | undefined;
             originalEvent: any | undefined;
         }
     ) => {
-        if (divEl.current) {
-            if (show === false) {
-                const element = divEl.current;
-                const children = element.querySelectorAll('.dropdown-menu.show');
-                // Standard for-loop for maximum backward compatibility
-                for (let i = 0; i < children.length; i++) {
-                    children[i].classList.remove('show');
-                }
-            }
+        if (divEl.current && show === false) {
+            const activeElements = divEl.current.querySelectorAll('.dropdown-menu.show');
+            activeElements.forEach((el) => {
+                el.classList.remove('show');
+            });
         }
-        if (typeof props.onToggle === 'function') {
-            props.onToggle(show, meta);
+
+        if (typeof onToggle === 'function') {
+            onToggle(show, meta);
         }
     };
 
     return (
         <NavDropdown
-            // Merging your internal ref with the forwarded ref
+            {...rest}
             ref={(node: any) => {
                 divEl.current = node;
                 if (typeof ref === 'function') ref(node);
                 else if (ref) (ref as any).current = node;
             }}
-            className={props.className}
-            title={props.title}
-            id={props.id}
-            onToggle={onToggle as any}
-            align={props.alignRight ? "end" : props.align}
-            disabled={props.disabled}
-            active={props.active}
-            menuRole={props.menuRole}
-            renderMenuOnMount={props.renderMenuOnMount}
-            rootCloseEvent={props.rootCloseEvent}
-            bsPrefix={props.bsPrefix}
-            drop={props.drop}
-            show={props.show}
-            focusFirstItemOnShow={props.focusFirstItemOnShow}
+            title={title}
+            onToggle={handleToggle as any}
+            align={alignRight ? 'end' : props.align}
         >
-            {props.children}
+            {children}
         </NavDropdown>
     );
 });
