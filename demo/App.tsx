@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Navbar, Nav, Container, Row, Col, Card, Button, Badge } from "react-bootstrap";
 import { DropdownSubmenu, NavDropdownMenu, MenuItem } from "react-bootstrap-submenu";
 
@@ -8,6 +8,43 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-submenu/dist/index.css";
 // Import custom premium demo styles
 import "./App.css";
+
+declare global {
+  interface Window {
+    adsbygoogle?: unknown[];
+  }
+}
+
+// AdSense's <ins> tag only requests an ad once `(adsbygoogle = window.adsbygoogle || []).push({})`
+// runs against it. In a static HTML page that happens via an inline <script> right after the tag;
+// in React, the <ins> only exists once this component has actually mounted, so the push has to
+// happen in an effect instead. The `pushed` ref stops StrictMode's dev-only double-invoke of
+// effects from pushing twice against the same node (harmless, but throws a noisy console error).
+function AdSlot() {
+  const pushed = useRef(false);
+
+  useEffect(() => {
+    if (pushed.current) return;
+    pushed.current = true;
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch {
+      // ad blocker, or ad network script not loaded yet — non-fatal either way
+    }
+  }, []);
+
+  return (
+    <div className="ad-slot text-center py-3" aria-label="Advertisement">
+      {/* react-bootstrap-submenu */}
+      <ins className="adsbygoogle"
+           style={{ display: "block" }}
+           data-ad-client="ca-pub-8961380325850669"
+           data-ad-slot="8329581963"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+    </div>
+  );
+}
 
 export default function App() {
   // States to toggle code snippet panels
@@ -39,6 +76,8 @@ export default function App() {
           </div>
         </Container>
       </header>
+
+      <AdSlot />
 
       {/* SCROLLABLE SHOWCASE SECTIONS */}
       <main className="showcase-content py-5 bg-light text-dark">
